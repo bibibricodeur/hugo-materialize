@@ -1,0 +1,42 @@
+{{ define "main" }}
+<main aria-role="main">
+    <div class="container" id="container">
+        <!-- Page Content goes here -->
+        <div class="row">
+
+            <div class="col s12 m9 l9">
+                {{ range .Paginator.Pages.ByDate.Reverse }}
+                    <article class="card">
+                        <div class="card-content">
+                            <span class="card-title"><a href='{{ .RelPermalink }}'>{{ .Title }}</a></span>
+                            {{ .Summary }}
+                        </div><!--/card-content-->
+                        <div class="card-action">
+                            Posté le: {{ .Date.Format "02.01.2006 15:04" }}
+                            {{ if .Params.tags }}
+                            <p>
+                                <strong>Etiquette(s):</strong>
+                                {{ range .Params.tags }}
+                                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                                {{ end }}
+                            </p>
+                            {{ end }}
+                            {{ if .Truncated }}
+                            <p>
+                                <a href="{{ .RelPermalink }}">En savoir plus &rarr;</a>
+                            </p>
+                            {{ end }}
+                        </div><!--/card-action-->
+                    </article><!--/card-->
+                {{ end }}
+
+                {{ template "_internal/pagination.html" . }}
+                
+            </div><!--/col-->
+
+            {{- partial "sidebar.html" . -}}
+
+        </div><!--/row-->
+    </div><!--/container-->
+</main>
+{{ end }}

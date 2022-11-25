@@ -1,0 +1,85 @@
+<!-- Sidebar Widgets Column -->
+<div class="col s12 m3 l3">
+
+    <!-- Widget -->
+      <div class="card">
+        <div class="card-image card-image-goeland">
+          <img src="{{.Site.BaseURL}}/img/logo_nicolas_180.png" alt="My image">
+        </div><!--/card-image-->
+      </div><!--/card-->
+
+    <!-- Widget Météo -->
+    <div class="card">
+      <div class="card-body">
+        <span class="card-title" id="patelin"></span>
+        <ul class="collection">
+          <li class="collection-item" id="description"></li>
+          <!--<li class="collection-item" id="icone"></li>-->
+          <li class="collection-item" id="heure"></li>
+          <li class="collection-item" id="humidite"></li>
+          <li class="collection-item" id="pression"></li>
+          <li class="collection-item" id="temperature"></li>
+          <li class="collection-item" id="vitesse"></li>
+        </ul>
+      </div><!--/card-content-->
+      <div class="card-action">
+        Source: <a href="https://www.prevision-meteo.ch/meteo/localite/matha">prevision-meteo.ch</a>
+      </div><!--/card-action-->
+    </div><!--/card-->
+
+    <!-- Side Widget -->
+    {{ if .Pages }}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Dernier(s) article(s)</span>
+        <ul class="collection">
+          {{ range first 6 .Pages.ByDate.Reverse }}
+          <a class="collection-item" href="{{ .RelPermalink}}">{{ .Title }}</a>
+          {{ end }}
+        </ul>
+      </div><!--/card-content-->
+    </div><!--/card-->
+    {{ end }}
+
+    <!-- Side Widget -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Catégorie(s)</span>
+        <ul class="collection">
+          {{- if isset .Site.Taxonomies "categories" }}
+              {{- if not (eq (len .Site.Taxonomies.categories) 0) }}
+                  {{- range $name, $items := .Site.Taxonomies.categories }}
+                      <a class="collection-item" href="{{ "categories/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | title | humanize }}</a>
+                  {{- end }}
+              {{- end }}
+          {{- end }}
+        </ul>
+      </div><!--/card-content-->
+    </div><!--/card-->
+
+    <!-- Side Widget -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Etiquette(s)</span>
+        <ul class="collection">
+          {{- if isset .Site.Taxonomies "tags" }}
+              {{- if not (eq (len .Site.Taxonomies.tags) 0) }}
+                  {{- range $name, $items := .Site.Taxonomies.tags }}
+                  <li>
+                      <a class="collection-item" href="{{ "tags/" | relLangURL }}{{ $name | urlize | lower }}">{{ $name | title | humanize }}</a>
+                  </li>
+                  {{- end }}
+              {{- end }}
+          {{- end }}
+        </ul>
+      </div><!--/card-content-->
+    </div><!--/card-->
+
+    <!-- Side Widget -->
+    <div class="card">
+      <div class="card-action">
+            <a href="{{ .Site.BaseURL }}index.xml">Flux RSS</a>
+      </div><!--/card-content-->
+    </div><!--/card-->
+
+</div><!--/col s12 m3 l3-->

@@ -1,0 +1,35 @@
+<footer class="page-footer green">
+    <div class="container">
+        <div class="row">
+            <div class="col l9 s12">
+                <h5 class="white-text">Citations</h5>
+                <ul>
+                    {{ range .Site.Data.citations }}
+                        <li>{{ .citation }} <a class="green-text text-lighten-3" href="{{ .url }}">{{ .name }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    {{ range .Site.Data.liens }}
+                        <li><a class="white-text" href="{{ .url }}">{{ .name }}</a></li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="green-text text-lighten-3" href="http://materializecss.com">Materialize</a> 
+            &copy; {{ now.Year }} <a class="green-text text-lighten-3" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+        </div>
+    </div>
+</footer>
+<a href="#container" class="waves-effect waves-light btn" id="bouton_remonter"
+title="Clic pour remonter en haut de cette satanée page">Remonter</a>
+
+<script src="{{ "js/jquery-3.6.1.min.js" | relURL }}"></script>
+<script src="{{ "materialize/js/materialize.min.js" | relURL }}"></script>
+<script src="{{ "js/script.js" | relURL }}"></script>
+<script src="{{ "/js/meteo.ch/meteo.ch.js" | relURL }}"></script>
